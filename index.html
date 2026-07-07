@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<title>Für Helin</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #2b0f1a, #5c1a2e 50%, #2b0f1a);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .card {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 50px 40px;
+    max-width: 480px;
+  }
+
+  button#reveal {
+    padding: 16px 40px;
+    font-size: 18px;
+    font-family: inherit;
+    letter-spacing: 0.03em;
+    background: #e94e77;
+    color: white;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(233, 78, 119, 0.45);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  button#reveal:hover {
+    transform: translateY(-2px) scale(1.03);
+    box-shadow: 0 12px 30px rgba(233, 78, 119, 0.6);
+  }
+  button#reveal:active { transform: translateY(0) scale(0.98); }
+
+  #message {
+    display: none;
+    animation: fadeUp 0.9s ease forwards;
+  }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .title {
+    font-size: 34px;
+    color: #ffd9e2;
+    margin: 0 0 6px;
+    text-shadow: 0 2px 12px rgba(255, 105, 140, 0.5);
+  }
+  .title b { color: #ff8fab; }
+
+  .sub {
+    color: #f5c6d3;
+    font-size: 16px;
+    line-height: 1.7;
+    margin: 18px 0 26px;
+  }
+
+  .apology {
+    margin-top: 28px;
+    padding: 20px 22px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 217, 226, 0.25);
+    color: #ffe3ea;
+    font-size: 14.5px;
+    line-height: 1.7;
+    text-align: left;
+  }
+  .apology b { color: #ffb3c6; }
+
+  .heart {
+    position: absolute;
+    bottom: -10%;
+    color: #ff6f91;
+    opacity: 0.85;
+    animation: rise linear infinite;
+    pointer-events: none;
+    z-index: 1;
+  }
+  @keyframes rise {
+    0%   { transform: translateY(0) translateX(0) rotate(0deg); opacity: 0.9; }
+    100% { transform: translateY(-110vh) translateX(var(--drift)) rotate(360deg); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="card">
+    <button id="reveal" onclick="showMessage()">Anklicken 💌</button>
+
+    <div id="message">
+      <p class="title"><b>Gürkan</b> liebt <b>Helin</b>.<br>Ganz ehrlich. Ganz sicher.</p>
+      <p class="sub">
+        Nicht nur ein bisschen — richtig. Mit allem, was dazugehört:<br>
+        an dich denken, wenn du nicht da bist, lächeln wegen einer Nachricht,<br>
+        und wissen, dass du die Person bist, mit der alles leichter ist. ❤️
+      </p>
+
+      <div class="apology">
+        <b>Und weil auch mal was schiefgeht:</b><br>
+        Es tut mir leid, falls ich dich verletzt oder enttäuscht habe.
+        Das war nie meine Absicht. Du bedeutest mir zu viel, um das einfach
+        stehen zu lassen — ich möchte es besser machen und mehr auf dich achten.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function showMessage() {
+      document.getElementById('message').style.display = 'block';
+      document.getElementById('reveal').style.display = 'none';
+      startHearts();
+    }
+
+    function startHearts() {
+      setInterval(() => {
+        const heart = document.createElement('div');
+        heart.className = 'heart';
+        heart.textContent = ['❤','💕','💗','💖'][Math.floor(Math.random()*4)];
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.fontSize = (14 + Math.random() * 20) + 'px';
+        heart.style.setProperty('--drift', (Math.random() * 100 - 50) + 'px');
+        heart.style.animationDuration = (4 + Math.random() * 4) + 's';
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 8000);
+      }, 300);
+    }
+  </script>
+
+</body>
+</html>
