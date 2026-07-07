@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guten Morgen Helin 🌅</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { height: 100%; }
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #6a5acd 0%, #ff9a76 45%, #ffd97a 75%, #fff3d0 100%);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    overflow: hidden;
+    position: relative;
+  }
+
+  /* Sonne */
+  .sun {
+    position: absolute;
+    bottom: 18%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #fff3c4, #ffb347 70%);
+    box-shadow: 0 0 70px 20px rgba(255, 190, 90, 0.55);
+    z-index: 0;
+    animation: rise-sun 3s ease-out;
+  }
+  @keyframes rise-sun {
+    from { transform: translateX(-50%) translateY(60px); opacity: 0; }
+    to   { transform: translateX(-50%) translateY(0); opacity: 1; }
+  }
+
+  .cloud {
+    position: absolute;
+    background: rgba(255,255,255,0.75);
+    border-radius: 50px;
+    z-index: 1;
+    filter: blur(0.5px);
+  }
+  .cloud::before, .cloud::after {
+    content: '';
+    position: absolute;
+    background: inherit;
+    border-radius: 50%;
+  }
+
+  .card {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    padding: 34px 28px;
+    max-width: 420px;
+    width: 88vw;
+    background: rgba(255, 255, 255, 0.82);
+    border-radius: 24px;
+    box-shadow: 0 20px 50px rgba(90, 40, 20, 0.25);
+  }
+
+  .eyebrow {
+    font-size: 12px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #d1731f;
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+
+  h1 {
+    font-size: 24px;
+    color: #7a3e1d;
+    line-height: 1.35;
+    margin-bottom: 14px;
+  }
+  h1 b { color: #e8601f; }
+
+  p.text {
+    font-size: 15px;
+    color: #6b4a35;
+    line-height: 1.75;
+    margin-bottom: 20px;
+  }
+
+  .choices {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    padding: 9px 14px;
+    border-radius: 20px;
+    background: #fff0dc;
+    border: 2px solid #ffcf9e;
+    color: #a8683e;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .chip.active {
+    background: #e8601f;
+    border-color: #e8601f;
+    color: white;
+  }
+
+  .btnrow { display: flex; gap: 10px; justify-content: center; }
+  button.action {
+    padding: 13px 26px;
+    font-size: 15px;
+    font-weight: 700;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  #yesBtn { background: #e8601f; color: white; box-shadow: 0 8px 18px rgba(232, 96, 31, 0.4); }
+  #yesBtn:active { transform: scale(0.96); }
+  #noBtn { background: #fff0dc; color: #a8683e; border: 2px solid #ffcf9e; }
+
+  #answer {
+    margin-top: 14px;
+    font-weight: 700;
+    color: #e8601f;
+    font-size: 15px;
+    display: none;
+  }
+
+  /* RIESEN EFFEKT */
+  #bigmoment {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    background: radial-gradient(circle at center, rgba(255,210,120,0.35), rgba(106,90,205,0.55));
+    pointer-events: none;
+  }
+  #bigtext {
+    font-size: 15vw;
+    font-weight: 900;
+    color: #fff;
+    text-shadow: 0 0 30px rgba(255,150,60,0.9), 0 0 60px rgba(255,90,150,0.7);
+    animation: bigpop 1.1s cubic-bezier(.2,1.6,.4,1) forwards;
+  }
+  @keyframes bigpop {
+    0%   { transform: scale(0.2) rotate(-8deg); opacity: 0; }
+    55%  { transform: scale(1.15) rotate(3deg); opacity: 1; }
+    75%  { transform: scale(0.97) rotate(-1deg); }
+    100% { transform: scale(1) rotate(0deg); opacity: 1; }
+  }
+
+  .confetti {
+    position: fixed;
+    top: -5vh;
+    z-index: 49;
+    pointer-events: none;
+    animation: fall linear forwards;
+  }
+  @keyframes fall {
+    to { transform: translateY(115vh) rotate(720deg); opacity: 0.2; }
+  }
+</style>
+</head>
+<body>
+
+  <div class="sun"></div>
+  <div class="cloud" style="width:90px;height:34px;top:12%;left:8%;"></div>
+  <div class="cloud" style="width:120px;height:40px;top:20%;right:6%;"></div>
+
+  <div class="card">
+    <div class="eyebrow">Guten Morgen ☀️</div>
+    <h1>Fahr ich dich morgen zur Arbeit, <b>Helin</b>?</h1>
+    <p class="text">
+      Ich hol dich einfach ab und bring dich hin — dann musst du dich um
+      nichts kümmern. Und wenn wir schon zusammen unterwegs sind: Lust,
+      dass wir vorher oder nachher zusammen was essen?
+    </p>
+
+    <div class="choices">
+      <div class="chip active" onclick="pick(this)">Vorher frühstücken 🥐</div>
+      <div class="chip" onclick="pick(this)">Nachher was essen 🍝</div>
+      <div class="chip" onclick="pick(this)">Nur abholen reicht 🚗</div>
+    </div>
+
+    <div class="btnrow">
+      <button class="action" id="yesBtn" onclick="celebrate()">Ja, gerne 🥰</button>
+      <button class="action" id="noBtn" onclick="softNo()">Heute nicht</button>
+    </div>
+    <div id="answer"></div>
+  </div>
+
+  <div id="bigmoment"><div id="bigtext">JUHU! 🎉</div></div>
+
+  <script>
+    function pick(el) {
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      el.classList.add('active');
+    }
+
+    function softNo() {
+      const a = document.getElementById('answer');
+      a.style.display = 'block';
+      a.textContent = 'Alles gut 💛 sag einfach Bescheid, wenn\'s besser passt.';
+    }
+
+    function celebrate() {
+      const chosen = document.querySelector('.chip.active').textContent.trim();
+      const a = document.getElementById('answer');
+      a.style.display = 'block';
+      a.textContent = 'Perfekt, ich hol dich ab — Plan: ' + chosen + ' 💛';
+
+      const big = document.getElementById('bigmoment');
+      big.style.display = 'flex';
+      setTimeout(() => { big.style.display = 'none'; }, 2200);
+
+      confettiBurst();
+    }
+
+    const colors = ['#e8601f','#ffd97a','#ff9a76','#6a5acd','#ffffff','#ff6f9c'];
+    function confettiBurst() {
+      for (let i = 0; i < 140; i++) {
+        setTimeout(() => {
+          const c = document.createElement('div');
+          c.className = 'confetti';
+          const size = 6 + Math.random() * 8;
+          c.style.left = Math.random() * 100 + 'vw';
+          c.style.width = size + 'px';
+          c.style.height = (size * 0.4) + 'px';
+          c.style.background = colors[Math.floor(Math.random() * colors.length)];
+          c.style.borderRadius = Math.random() > 0.5 ? '50%' : '2px';
+          c.style.animationDuration = (2.2 + Math.random() * 1.8) + 's';
+          document.body.appendChild(c);
+          setTimeout(() => c.remove(), 4200);
+        }, i * 12);
+      }
+    }
+  </script>
+
+</body>
+</html>
